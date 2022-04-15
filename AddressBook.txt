@@ -1,0 +1,228 @@
+Enter password: ******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 13
+Server version: 8.0.28 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| address_book       |
+| information_schema |
+| mysql              |
+| payroll_service    |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+8 rows in set (1.62 sec)
+
+mysql> use address_book
+Database changed
+mysql> create table  addressbook (id int not null auto_increment, firstname varchar(50) not null, lastname varchar(52) not null, address varchar(80) not null, city varchar(70) not null, state varchar(90) not null, zip varchar(15) not null, phonenumber varchar(20) not null, email varchar(85) not null,primary key(id));
+Query OK, 0 rows affected (6.34 sec)
+
+mysql> describe  addressbook;
++-------------+-------------+------+-----+---------+----------------+
+| Field       | Type        | Null | Key | Default | Extra          |
++-------------+-------------+------+-----+---------+----------------+
+| id          | int         | NO   | PRI | NULL    | auto_increment |
+| firstname   | varchar(50) | NO   |     | NULL    |                |
+| lastname    | varchar(52) | NO   |     | NULL    |                |
+| address     | varchar(80) | NO   |     | NULL    |                |
+| city        | varchar(70) | NO   |     | NULL    |                |
+| state       | varchar(90) | NO   |     | NULL    |                |
+| zip         | varchar(15) | NO   |     | NULL    |                |
+| phonenumber | varchar(20) | NO   |     | NULL    |                |
+| email       | varchar(85) | NO   |     | NULL    |                |
++-------------+-------------+------+-----+---------+----------------+
+9 rows in set (0.49 sec)
+
+mysql> insert into addressbook (firstname,lastname,address,city,state,zip,phonenumber,email) values ('Rachoti','Minajagi','Basaveswar nagar','Gadag','Karnathaka','875444','9686127142','rachotism@gmai.com');
+Query OK, 1 row affected (0.82 sec)
+
+mysql> select * from address_book;
+ERROR 1146 (42S02): Table 'address_book.address_book' doesn't exist
+mysql> select * from addressbook;
++----+-----------+----------+------------------+-------+------------+--------+-------------+--------------------+
+| id | firstname | lastname | address          | city  | state      | zip    | phonenumber | email              |
++----+-----------+----------+------------------+-------+------------+--------+-------------+--------------------+
+|  1 | Rachoti   | Minajagi | Basaveswar nagar | Gadag | Karnathaka | 875444 | 9686127142  | rachotism@gmai.com |
++----+-----------+----------+------------------+-------+------------+--------+-------------+--------------------+
+1 row in set (0.04 sec)
+
+mysql> insert into addressbook (firstname,lastname,address,city,state,zip,phonenumber,email) values ('veeresh','yendigeri','Basaveswar nagar','Gadag','Karnathaka','875444','965548722','veereshm@gmail.com');
+Query OK, 1 row affected (0.19 sec)
+
+mysql> insert into addressbook (firstname,lastname,address,city,state,zip,phonenumber,email) values ('ramesh','pilli','Basaveswar nagar','Gadag','Karnathaka','875444','9655554422','ramesh@gmail.com');
+Query OK, 1 row affected (0.20 sec)
+
+mysql> insert into addressbook (firstname,lastname,address,city,state,zip,phonenumber,email) values ('Laxmi','heremath','Basaveswar nagar','Gadag','Karnathaka','875444','965557772','laxmi@gmail.com');
+Query OK, 1 row affected (0.19 sec)
+
+mysql> select * from addressbook;
++----+-----------+-----------+------------------+-------+------------+--------+-------------+--------------------+
+| id | firstname | lastname  | address          | city  | state      | zip    | phonenumber | email              |
++----+-----------+-----------+------------------+-------+------------+--------+-------------+--------------------+
+|  1 | Rachoti   | Minajagi  | Basaveswar nagar | Gadag | Karnathaka | 875444 | 9686127142  | rachotism@gmai.com |
+|  2 | veeresh   | yendigeri | Basaveswar nagar | Gadag | Karnathaka | 875444 | 965548722   | veereshm@gmail.com |
+|  3 | ramesh    | pilli     | Basaveswar nagar | Gadag | Karnathaka | 875444 | 9655554422  | ramesh@gmail.com   |
+|  4 | Laxmi     | heremath  | Basaveswar nagar | Gadag | Karnathaka | 875444 | 965557772   | laxmi@gmail.com    |
++----+-----------+-----------+------------------+-------+------------+--------+-------------+--------------------+
+4 rows in set (0.02 sec)
+
+mysql> select fristnamme from addressbook ORDER BY fristname;
+ERROR 1054 (42S22): Unknown column 'fristnamme' in 'field list'
+mysql> select firstname from addressbook ORDER BY firstname;
++-----------+
+| firstname |
++-----------+
+| Laxmi     |
+| Rachoti   |
+| ramesh    |
+| veeresh   |
++-----------+
+4 rows in set (0.05 sec)
+
+mysql> select * from addressbook;
++----+-----------+-----------+------------------+-------+------------+--------+-------------+--------------------+
+| id | firstname | lastname  | address          | city  | state      | zip    | phonenumber | email              |
++----+-----------+-----------+------------------+-------+------------+--------+-------------+--------------------+
+|  1 | Rachoti   | Minajagi  | Basaveswar nagar | Gadag | Karnathaka | 875444 | 9686127142  | rachotism@gmai.com |
+|  2 | veeresh   | yendigeri | Basaveswar nagar | Gadag | Karnathaka | 875444 | 965548722   | veereshm@gmail.com |
+|  3 | ramesh    | pilli     | Basaveswar nagar | Gadag | Karnathaka | 875444 | 9655554422  | ramesh@gmail.com   |
+|  4 | Laxmi     | heremath  | Basaveswar nagar | Gadag | Karnathaka | 875444 | 965557772   | laxmi@gmail.com    |
++----+-----------+-----------+------------------+-------+------------+--------+-------------+--------------------+
+4 rows in set (0.00 sec)
+
+mysql> alter table addressbook add ContactType varchar(200);
+Query OK, 0 rows affected (2.94 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from addressbook;
++----+-----------+-----------+------------------+-------+------------+--------+-------------+--------------------+-------------+
+| id | firstname | lastname  | address          | city  | state      | zip    | phonenumber | email              | ContactType |
++----+-----------+-----------+------------------+-------+------------+--------+-------------+--------------------+-------------+
+|  1 | Rachoti   | Minajagi  | Basaveswar nagar | Gadag | Karnathaka | 875444 | 9686127142  | rachotism@gmai.com | NULL        |
+|  2 | veeresh   | yendigeri | Basaveswar nagar | Gadag | Karnathaka | 875444 | 965548722   | veereshm@gmail.com | NULL        |
+|  3 | ramesh    | pilli     | Basaveswar nagar | Gadag | Karnathaka | 875444 | 9655554422  | ramesh@gmail.com   | NULL        |
+|  4 | Laxmi     | heremath  | Basaveswar nagar | Gadag | Karnathaka | 875444 | 965557772   | laxmi@gmail.com    | NULL        |
++----+-----------+-----------+------------------+-------+------------+--------+-------------+--------------------+-------------+
+4 rows in set (0.00 sec)
+
+mysql> update addressbook set ContactType = 'family' where id =1;
+Query OK, 1 row affected (0.21 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from addressbook;
++----+-----------+-----------+------------------+-------+------------+--------+-------------+--------------------+-------------+
+| id | firstname | lastname  | address          | city  | state      | zip    | phonenumber | email              | ContactType |
++----+-----------+-----------+------------------+-------+------------+--------+-------------+--------------------+-------------+
+|  1 | Rachoti   | Minajagi  | Basaveswar nagar | Gadag | Karnathaka | 875444 | 9686127142  | rachotism@gmai.com | family      |
+|  2 | veeresh   | yendigeri | Basaveswar nagar | Gadag | Karnathaka | 875444 | 965548722   | veereshm@gmail.com | NULL        |
+|  3 | ramesh    | pilli     | Basaveswar nagar | Gadag | Karnathaka | 875444 | 9655554422  | ramesh@gmail.com   | NULL        |
+|  4 | Laxmi     | heremath  | Basaveswar nagar | Gadag | Karnathaka | 875444 | 965557772   | laxmi@gmail.com    | NULL        |
++----+-----------+-----------+------------------+-------+------------+--------+-------------+--------------------+-------------+
+4 rows in set (0.04 sec)
+
+mysql> update addressbook set ContactType = 'Relation' where id =2;
+Query OK, 1 row affected (0.17 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from addressbook;
++----+-----------+-----------+------------------+-------+------------+--------+-------------+--------------------+-------------+
+| id | firstname | lastname  | address          | city  | state      | zip    | phonenumber | email              | ContactType |
++----+-----------+-----------+------------------+-------+------------+--------+-------------+--------------------+-------------+
+|  1 | Rachoti   | Minajagi  | Basaveswar nagar | Gadag | Karnathaka | 875444 | 9686127142  | rachotism@gmai.com | family      |
+|  2 | veeresh   | yendigeri | Basaveswar nagar | Gadag | Karnathaka | 875444 | 965548722   | veereshm@gmail.com | Relation    |
+|  3 | ramesh    | pilli     | Basaveswar nagar | Gadag | Karnathaka | 875444 | 9655554422  | ramesh@gmail.com   | NULL        |
+|  4 | Laxmi     | heremath  | Basaveswar nagar | Gadag | Karnathaka | 875444 | 965557772   | laxmi@gmail.com    | NULL        |
++----+-----------+-----------+------------------+-------+------------+--------+-------------+--------------------+-------------+
+4 rows in set (0.04 sec)
+
+mysql> update addressbook set ContactType = 'friend' where id =3;
+Query OK, 1 row affected (0.20 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from addressbook;
++----+-----------+-----------+------------------+-------+------------+--------+-------------+--------------------+-------------+
+| id | firstname | lastname  | address          | city  | state      | zip    | phonenumber | email              | ContactType |
++----+-----------+-----------+------------------+-------+------------+--------+-------------+--------------------+-------------+
+|  1 | Rachoti   | Minajagi  | Basaveswar nagar | Gadag | Karnathaka | 875444 | 9686127142  | rachotism@gmai.com | family      |
+|  2 | veeresh   | yendigeri | Basaveswar nagar | Gadag | Karnathaka | 875444 | 965548722   | veereshm@gmail.com | Relation    |
+|  3 | ramesh    | pilli     | Basaveswar nagar | Gadag | Karnathaka | 875444 | 9655554422  | ramesh@gmail.com   | friend      |
+|  4 | Laxmi     | heremath  | Basaveswar nagar | Gadag | Karnathaka | 875444 | 965557772   | laxmi@gmail.com    | NULL        |
++----+-----------+-----------+------------------+-------+------------+--------+-------------+--------------------+-------------+
+4 rows in set (0.01 sec)
+
+mysql> update addressbook set ContactType = 'BestFriend' where id =4;
+Query OK, 1 row affected (0.26 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from addressbook;
++----+-----------+-----------+------------------+-------+------------+--------+-------------+--------------------+-------------+
+| id | firstname | lastname  | address          | city  | state      | zip    | phonenumber | email              | ContactType |
++----+-----------+-----------+------------------+-------+------------+--------+-------------+--------------------+-------------+
+|  1 | Rachoti   | Minajagi  | Basaveswar nagar | Gadag | Karnathaka | 875444 | 9686127142  | rachotism@gmai.com | family      |
+|  2 | veeresh   | yendigeri | Basaveswar nagar | Gadag | Karnathaka | 875444 | 965548722   | veereshm@gmail.com | Relation    |
+|  3 | ramesh    | pilli     | Basaveswar nagar | Gadag | Karnathaka | 875444 | 9655554422  | ramesh@gmail.com   | friend      |
+|  4 | Laxmi     | heremath  | Basaveswar nagar | Gadag | Karnathaka | 875444 | 965557772   | laxmi@gmail.com    | BestFriend  |
++----+-----------+-----------+------------------+-------+------------+--------+-------------+--------------------+-------------+
+4 rows in set (0.01 sec)
+
+mysql> select count(*)  from  addressbook where ContactType = "friend";
++----------+
+| count(*) |
++----------+
+|        1 |
++----------+
+1 row in set (0.08 sec)
+
+mysql> select count(*)  from  addressbook where ContactType = "family";
++----------+
+| count(*) |
++----------+
+|        1 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select count(*)  from  addressbook where ContactType = "Relation";
++----------+
+| count(*) |
++----------+
+|        1 |
++----------+
+1 row in set (0.07 sec)
+
+mysql> select count(*)  from  addressbook where ContactType = "BestFriend";
++----------+
+| count(*) |
++----------+
+|        1 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> insert into addressbook (firstname,lastname,address,city,state,zip,phonenumber,email) values ('Anand','kubasad','Basaveshwar nagar','Gadag','Karnathaka','348500','9874561236','anand@gmail.com');
+Query OK, 1 row affected (0.16 sec)
+
+mysql> select * from addressbook;
+
++----+-----------+-----------+-------------------+-------+------------+--------+-------------+--------------------+-------------+
+| id | firstname | lastname  | address           | city  | state      | zip    | phonenumber | email              | ContactType |
++----+-----------+-----------+-------------------+-------+------------+--------+-------------+--------------------+-------------+
+|  1 | Rachoti   | Minajagi  | Basaveswar nagar  | Gadag | Karnathaka | 875444 | 9686127142  | rachotism@gmai.com | family      |
+|  2 | veeresh   | yendigeri | Basaveswar nagar  | Gadag | Karnathaka | 875444 | 965548722   | veereshm@gmail.com | Relation    |
+|  3 | ramesh    | pilli     | Basaveswar nagar  | Gadag | Karnathaka | 875444 | 9655554422  | ramesh@gmail.com   | friend      |
+|  4 | Laxmi     | heremath  | Basaveswar nagar  | Gadag | Karnathaka | 875444 | 965557772   | laxmi@gmail.com    | BestFriend  |
+|  5 | Anand     | kubasad   | Basaveshwar nagar | Gadag | Karnathaka | 348500 | 9874561236  | anand@gmail.com    | NULL        |
++----+-----------+-----------+-------------------+-------+------------+--------+-------------+--------------------+-------------+
+5 rows in set (0.01 sec)
